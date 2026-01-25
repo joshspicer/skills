@@ -4,12 +4,6 @@ Shared Swift libraries and patterns for iOS projects.
 
 **Important:** This skills document is the definitive source of truth for custom library patterns. Keep this updated when making changes to library integration strategies.
 
-## App Catalog
-
-- [MapCalipers](https://joshspicer.com/mapcalipers)
-- [HabitBridge](https://joshspicer.com/HabitBridge)
-- [Tank Game](https://joshspicer.com/tankgame)
-- [Bunny Bunch](https://joshspicer.com/bunnybunch)
 
 ## Local Development vs CI/Distribution
 
