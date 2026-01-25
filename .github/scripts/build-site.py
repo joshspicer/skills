@@ -7,12 +7,13 @@ import os
 import re
 import yaml
 import markdown
+import shutil
 from pathlib import Path
 from typing import Dict, List, Any
 
 # Configuration
 REPO_ROOT = Path(__file__).parent.parent.parent
-DOCS_DIR = REPO_ROOT / "docs"
+TEMPLATES_DIR = REPO_ROOT / ".github" / "templates"
 OUTPUT_DIR = REPO_ROOT / "docs"
 
 def find_skill_files() -> List[Path]:
@@ -261,10 +262,16 @@ def main():
     # Ensure output directory exists
     OUTPUT_DIR.mkdir(exist_ok=True)
 
+    # Copy CSS from templates
+    css_source = TEMPLATES_DIR / "styles.css"
+    css_dest = OUTPUT_DIR / "styles.css"
+    shutil.copy2(css_source, css_dest)
+    print("Copied styles.css from templates")
+
     # Generate index page
     index_html = generate_index_html(skills)
     (OUTPUT_DIR / "index.html").write_text(index_html)
-    print("\nGenerated index.html")
+    print("Generated index.html")
 
     # Generate individual skill pages
     for skill in skills:
