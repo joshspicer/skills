@@ -1,6 +1,6 @@
 ---
 name: ios-project-setup
-description: Standard patterns for setting up iOS projects including MCP server configuration, Info.plist handling, version/commit embedding, server components with Docker workflows, code organization, and simulator instructions. Use when creating new iOS projects or configuring existing ones.
+description: Standard patterns for setting up iOS projects including MCP server configuration, Info.plist handling, version/commit embedding, server components with Docker workflows, code organization, simulator instructions, and checking Xcode Cloud CI status. Use when creating new iOS projects or configuring existing ones.
 metadata:
   author: joshspicer
   version: "1.0"
@@ -186,4 +186,5 @@ See [references/simulator.md](references/simulator.md) for fallback commands whe
 - [Server & Docker](references/server-docker.md) - Docker workflows and App Store sync
 - [Code Organization](references/code-organization.md) - File splitting patterns
 - [Simulator](references/simulator.md) - Build, run, and test commands
-- [Custom Libraries](references/custom-libraries.md) - Future shared packages (TODO)
+- [Custom Libraries](references/custom-libraries.md) - Shared packages (TODO)
+- [Xcode Cloud CI Status](references/xcode-cloud-ci-status.md) - Check build status via GitHub MCP
