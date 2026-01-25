@@ -23,13 +23,10 @@ ProjectName/
 │   └── scripts/                    # Automation scripts
 ├── ci_scripts/
 │   └── ci_post_clone.sh           # Xcode Cloud commit embedding
-├── ProjectName/
+├── ProjectName/                    # iOS-specific code
 │   ├── Info.plist                  # Minimal, checked into git
-│   ├── GitCommit.swift             # Auto-generated commit hash
-│   ├── Models/
-│   ├── Views/
-│   ├── Services/
-│   └── Extensions/                 # Class+Feature.swift files
+│   └── GitCommit.swift             # Auto-generated commit hash
+├── Shared/                         # Cross-platform code (models, services, etc.)
 ├── ProjectName.xcodeproj/
 │   └── project.pbxproj             # Version and encryption flags
 ├── server/                         # Optional server component
@@ -138,18 +135,7 @@ See [references/version-embedding.md](references/version-embedding.md) for auto-
 - **Target**: 200-300 lines
 - **Maximum**: 400 lines
 - Split large classes with extension files
-
-### Directory Structure
-
-```
-Models/          # Data structures
-Views/           # SwiftUI views
-  └── SubView/   # Sub-components for large views
-Services/        # Business logic
-Managers/        # State coordination
-Extensions/      # Type extensions
-Utilities/       # Helpers
-```
+- Put cross-platform code in `Shared/` folder
 
 See [references/code-organization.md](references/code-organization.md) for detailed patterns.
 
