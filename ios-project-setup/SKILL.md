@@ -19,17 +19,17 @@ ProjectName/
 │   └── mcp.json                    # MCP server configuration
 ├── .github/
 │   ├── instructions/               # AI context instructions
-│   ├── workflows/                  # CI/CD (Docker, version bumping)
+│   ├── workflows/                  # Optional: CI/CD (Docker, version bumping)
 │   └── scripts/                    # Automation scripts
-├── ci_scripts/
-│   └── ci_post_clone.sh           # Xcode Cloud commit embedding
+├── ci_scripts/                     # Optional: Xcode Cloud scripts
+│   └── ci_post_clone.sh
 ├── ProjectName/                    # iOS-specific code
-│   ├── Info.plist                  # Minimal, checked into git
-│   └── GitCommit.swift             # Auto-generated commit hash
-├── Shared/                         # Cross-platform code (models, services, etc.)
+│   ├── Info.plist
+│   └── GitCommit.swift             # Optional: auto-generated commit hash
+├── Shared/ (or "ProjectName Shared/")  # Cross-platform code
 ├── ProjectName.xcodeproj/
 │   └── project.pbxproj             # Version and encryption flags
-├── server/                         # Optional server component
+├── server/                         # Optional: server component
 │   ├── Dockerfile
 │   └── docker-compose.yml
 └── CLAUDE.md                       # AI development guidance
@@ -37,11 +37,12 @@ ProjectName/
 
 ## Quick Setup Checklist
 
-1. **MCP Servers** - Configure XcodeBuildMCP and apple-developer-docs in `.vscode/mcp.json` and configured for Claude.
+1. **MCP Servers** - Configure XcodeBuildMCP and apple-developer-docs in `.vscode/mcp.json`
 2. **Encryption Flag** - Set `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO` in project.pbxproj
-3. **Version Embedding** - Create `GitCommit.swift` placeholder and `ci_scripts/ci_post_clone.sh`
-4. **Code Organization** - Split files at 400 lines max, use `Class+Feature.swift` extensions
-5. **Server (if needed)** - Docker setup with health checks and GitHub Actions workflows
+3. **Code Organization** - Split files at 400 lines max, use `Class+Feature.swift` extensions
+4. **Shared Folder** - Put cross-platform code in `Shared/` or `ProjectName Shared/`
+5. **Version Embedding (optional)** - Create `GitCommit.swift` and `ci_scripts/ci_post_clone.sh`
+6. **Server (optional)** - Docker setup with health checks and GitHub Actions workflows
 
 ## MCP Server Configuration
 
@@ -82,7 +83,9 @@ CURRENT_PROJECT_VERSION = 1
 
 See [references/info-plist.md](references/info-plist.md) for permission strings and background modes.
 
-## Version and Commit Embedding
+## Version and Commit Embedding (Optional)
+
+Embed git commit hash into the app for debugging. Useful for correlating user-reported issues with specific builds.
 
 ### GitCommit.swift (placeholder)
 
