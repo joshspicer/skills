@@ -11,80 +11,26 @@ This file provides structured information about available skills in this reposit
 
 ### ios-project-setup
 **Description:** Standard patterns for setting up iOS projects including MCP server configuration, Info.plist handling, version/commit embedding, server components with Docker workflows, code organization, simulator instructions, and checking Xcode Cloud CI status. Use when creating new iOS projects or configuring existing ones.
-
 **Author:** joshspicer
 **Version:** 1.0
 **Compatibility:** Requires Xcode, npx for MCP servers, and optionally Docker for server components.
 
-**Key Topics:**
-- MCP Server Configuration (.vscode/mcp.json)
-  - XcodeBuildMCP: Build and run apps, simulator tools, screenshots
-  - apple-developer-docs: Search and retrieve Apple API documentation
-- Info.plist and Encryption
-  - Always set INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO
-  - Minimal Info.plist, configure in build settings
-- Version and Commit Embedding
-  - GitCommit.swift structure with hash placeholder
-  - ci_scripts/ci_post_clone.sh for automatic commit hash injection
-- Code Organization
-  - Maximum 400 lines per file (target 200-300)
-  - Use ClassName+Feature.swift for extensions
-  - Split large classes with extension files
-  - Cross-platform code in Shared/ folder
-- Server Components (Optional)
-  - Docker with health checks
-  - GitHub Actions workflows for docker-publish and appstore-release
-- Simulator Instructions
-  - Prefer XcodeBuildMCP tools over raw xcodebuild/xcrun
-  - Tools: build_run_sim, build_sim, screenshot, log capture
-
-**File Structure:**
-```
-ProjectName/
-├── .vscode/
-│   └── mcp.json
-├── .github/
-│   ├── instructions/
-│   ├── workflows/
-│   └── scripts/
-├── ci_scripts/
-│   └── ci_post_clone.sh
-├── ProjectName/
-│   ├── Info.plist
-│   └── GitCommit.swift
-├── Shared/
-├── ProjectName.xcodeproj/
-│   └── project.pbxproj
-├── server/
-│   ├── Dockerfile
-│   └── docker-compose.yml
-└── CLAUDE.md
-```
-
-**References:**
-- code-organization.md: File naming patterns, size guidelines, extension files, view splitting, multi-platform shared code
-- mcp-servers.md: VSCode configuration, Claude Code permissions, terminal settings, GitHub instructions
-- info-plist.md: Build settings and permission strings
-- version-embedding.md: Commit hashing and auto-bumping workflows
-- server-docker.md: Docker workflows and App Store sync
-- simulator.md: Build, run, and test commands
-- xcode-cloud-ci-status.md: Check build status via GitHub MCP
-
 ---
+
 
 ## How to Use This Knowledge Base
 
 ### For LLMs:
-1. When a user asks about iOS project setup, reference the ios-project-setup skill
-2. The skill provides comprehensive patterns for project structure, configuration, and tooling
-3. Pay attention to the compatibility requirements and key topics
-4. Reference specific sections based on the user's question
+1. When a user asks about skills in this repository, reference the skill descriptions above
+2. Each skill provides comprehensive patterns for specific development tasks
+3. Pay attention to the compatibility requirements and metadata
+4. Skills are self-contained and can be referenced independently
 
 ### For Humans:
 - Visit https://joshspicer.github.io/skills/ for a formatted web interface
 - Each skill includes detailed documentation with code examples
-- Reference files provide deep-dive information on specific topics
+- Click on individual skills to see full documentation
 
 ## Update Information
 This file is automatically updated when the main branch is updated via GitHub Actions.
-Last structure update: 2026-01-25
+Last updated: 2026-01-25 19:38:37 UTC

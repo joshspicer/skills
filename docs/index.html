@@ -18,14 +18,15 @@
     <main class="container">
         <section id="skills-list">
             <h2>Available Skills</h2>
-            <div id="skills-container" class="skills-grid">
-                <div class="loading">Loading skills...</div>
+            <div class="skills-grid">
+                
+        <div class="skill-card" onclick="location.href='ios-project-setup.html'">
+            <h3>ios-project-setup</h3>
+            <p>Standard patterns for setting up iOS projects including MCP server configuration, Info.plist handling, version/commit embedding, server components with Docker workflows, code organization, simulator instructions, and checking Xcode Cloud CI status. Use when creating new iOS projects or configuring existing ones.</p>
+            <div class="skill-meta"><span>Author: joshspicer</span><span>v1.0</span></div>
+        </div>
+        
             </div>
-        </section>
-
-        <section id="skill-detail" class="hidden">
-            <button id="back-button" class="btn-back">&larr; Back to Skills</button>
-            <div id="skill-content"></div>
         </section>
     </main>
 
@@ -38,7 +39,5 @@
             </p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>

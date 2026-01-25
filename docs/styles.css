@@ -83,6 +83,9 @@ h2 {
     padding: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .skill-card:hover {
@@ -134,6 +137,8 @@ h2 {
     font-size: 1rem;
     margin-bottom: 20px;
     transition: background 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .btn-back:hover {
@@ -225,11 +230,6 @@ h2 {
     text-decoration: underline;
 }
 
-.loading {
-    text-align: center;
-    padding: 40px;
-    color: var(--text-light);
-}
 
 .error {
     background: #fee;

@@ -25,6 +25,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install PyYAML markdown
+
+      - name: Build static site
+        run: |
+          python .github/scripts/build-site.py
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
