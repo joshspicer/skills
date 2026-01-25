@@ -19,13 +19,13 @@ ProjectName/
 │   └── mcp.json                    # MCP server configuration
 ├── .github/
 │   ├── instructions/               # AI context instructions
-│   ├── workflows/                  # Optional: CI/CD (Docker, version bumping)
+│   ├── workflows/                  # CI/CD (Docker, version bumping)
 │   └── scripts/                    # Automation scripts
-├── ci_scripts/                     # Optional: Xcode Cloud scripts
+├── ci_scripts/                     # Xcode Cloud scripts
 │   └── ci_post_clone.sh
 ├── ProjectName/                    # iOS-specific code
 │   ├── Info.plist
-│   └── GitCommit.swift             # Optional: auto-generated commit hash
+│   └── GitCommit.swift             # Auto-generated commit hash
 ├── Shared/ (or "ProjectName Shared/")  # Cross-platform code
 ├── ProjectName.xcodeproj/
 │   └── project.pbxproj             # Version and encryption flags
@@ -41,7 +41,7 @@ ProjectName/
 2. **Encryption Flag** - Set `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO` in project.pbxproj
 3. **Code Organization** - Split files at 400 lines max, use `Class+Feature.swift` extensions
 4. **Shared Folder** - Put cross-platform code in `Shared/` or `ProjectName Shared/`
-5. **Version Embedding (optional)** - Create `GitCommit.swift` and `ci_scripts/ci_post_clone.sh`
+5. **Version Embedding** - Create `GitCommit.swift` and `ci_scripts/ci_post_clone.sh`
 6. **Server (optional)** - Docker setup with health checks and GitHub Actions workflows
 
 ## MCP Server Configuration
@@ -83,9 +83,9 @@ CURRENT_PROJECT_VERSION = 1
 
 See [references/info-plist.md](references/info-plist.md) for permission strings and background modes.
 
-## Version and Commit Embedding (Optional)
+## Version and Commit Embedding
 
-Embed git commit hash into the app for debugging. Useful for correlating user-reported issues with specific builds.
+Embed git commit hash into the app for debugging. Essential for correlating user-reported issues with specific builds.
 
 ### GitCommit.swift (placeholder)
 

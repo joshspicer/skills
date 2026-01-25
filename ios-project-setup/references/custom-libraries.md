@@ -60,6 +60,26 @@ For Xcode Cloud (and other CI systems) to work:
    git push origin 1.0.0
    ```
 
+3. **Link package to targets** - Adding an `XCRemoteSwiftPackageReference` to the project is not enough. You must also add `XCSwiftPackageProductDependency` entries and link them to each target's `packageProductDependencies` array:
+
+   ```
+   # In project.pbxproj, each target needs:
+   packageProductDependencies = (
+       03FCEF522F2681830019ACE9 /* MultiPlayKit */,
+   );
+
+   # And a corresponding section:
+   /* Begin XCSwiftPackageProductDependency section */
+   03FCEF522F2681830019ACE9 /* MultiPlayKit */ = {
+       isa = XCSwiftPackageProductDependency;
+       package = 03FCEF512F2681830019ACE9 /* XCRemoteSwiftPackageReference "MultiPlayKit" */;
+       productName = MultiPlayKit;
+   };
+   /* End XCSwiftPackageProductDependency section */
+   ```
+
+   **Common error**: "no such module 'PackageName'" usually means the package reference exists but isn't linked to the target.
+
 ### How It Works
 
 - Xcode prefers local packages over remote when both are available
@@ -80,6 +100,33 @@ mcp__xcodebuild__build_run_sim with workspace: "Project.xcworkspace"
 ```
 
 **Never use `.xcodeproj` directly when developing locally** - it will fetch the remote package and miss local changes.
+
+### Multi-Platform Refactoring
+
+When refactoring code in multi-platform projects (iOS/tvOS/macOS):
+
+1. **Check ALL targets** - Platform-specific files exist in separate folders (e.g., `Project iOS/`, `Project tvOS/`). Each may have its own `GameViewController.swift` or other files with platform-specific code.
+
+2. **Search for platform conditionals** - Look for `#if os(tvOS)`, `#if os(iOS)`, etc. These blocks may contain code that needs updating:
+   ```bash
+   grep -rn "os(tvOS)\|os(iOS)\|os(macOS)" "Project Shared/"
+   ```
+
+3. **Build ALL schemes before pushing** - Don't assume iOS success means tvOS will pass:
+   ```bash
+   xcodebuild -workspace Project.xcworkspace -scheme "Project iOS" build
+   xcodebuild -workspace Project.xcworkspace -scheme "Project tvOS" build
+   xcodebuild -workspace Project.xcworkspace -scheme "Project macOS" build
+   ```
+
+4. **Remove dead code completely** - When replacing old implementations, search for and remove:
+   - Unused protocols/delegates (e.g., `ClientSceneDelegate`)
+   - Old manager classes (e.g., `BluetoothMultiplayerManager` replaced by `MultiplayerManager`)
+   - Conformance extensions in platform-specific files
+
+**Common oversight**: Shared code compiles for iOS but fails on tvOS because:
+- Platform-specific view controllers still reference removed types
+- `#if os(tvOS)` blocks contain outdated API calls
 
 ## Shared Folder Pattern
 
