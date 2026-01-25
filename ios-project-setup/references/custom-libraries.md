@@ -37,6 +37,29 @@ Use the **workspace strategy** to enable local package development while maintai
 
 3. **Commit both** - The workspace enables local dev, project enables CI
 
+### CI Requirements
+
+For Xcode Cloud (and other CI systems) to work:
+
+1. **Commit `Package.resolved`** - Required because Xcode Cloud disables automatic dependency resolution for reproducible builds:
+   ```
+   ProjectName.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+   ```
+
+   Generate it locally:
+   ```bash
+   xcodebuild -resolvePackageDependencies -project ProjectName.xcodeproj
+   git add ProjectName.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+   git commit -m "Add Package.resolved for CI"
+   ```
+
+2. **Create version tags on packages** - If using `upToNextMajorVersion` requirement (e.g., `1.0.0..<2.0.0`), the package repo must have matching tags:
+   ```bash
+   # In the package repo
+   git tag -a 1.0.0 -m "Initial release"
+   git push origin 1.0.0
+   ```
+
 ### How It Works
 
 - Xcode prefers local packages over remote when both are available

@@ -87,11 +87,38 @@ When asked to check CI status on an iOS project:
 ## Troubleshooting Common Errors
 
 ### Swift Package Manager Resolution
-If you see errors about `Package.resolved`:
+
+**Error: `Package.resolved` required**
 ```
 a resolved file is required when automatic dependency resolution is disabled
 ```
-**Fix**: Commit the `Package.resolved` file to the repository.
+
+**Fix**: Commit the `Package.resolved` file:
+```bash
+xcodebuild -resolvePackageDependencies -project ProjectName.xcodeproj
+git add ProjectName.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+git commit -m "Add Package.resolved for CI"
+```
+
+**Error: No versions match requirement**
+```
+Failed to resolve dependencies Dependencies could not be resolved because no versions of 'packagename' match the requirement 1.0.0..<2.0.0
+```
+
+**Fix**: Create version tags on the package repository:
+```bash
+# In the package repo
+git tag -a 1.0.0 -m "Initial release"
+git push origin 1.0.0
+```
+
+Then re-resolve and commit:
+```bash
+# In the app repo
+xcodebuild -resolvePackageDependencies -project ProjectName.xcodeproj
+git add ProjectName.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+git commit -m "Update Package.resolved"
+```
 
 ### Code Signing
 Xcode Cloud handles code signing automatically, but ensure:
