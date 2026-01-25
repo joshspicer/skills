@@ -66,18 +66,24 @@ mcp__xcodebuild__build_run_sim with workspace: "Project.xcworkspace"
 
 ## Shared Folder Pattern
 
-Always put shareable Swift code in a `Shared/` folder. This makes it easy to release macOS, tvOS, or watchOS versions later.
+Put shareable Swift code in a shared folder for easy multi-platform support (macOS, tvOS, watchOS).
+
+**Naming:** Either `Shared/` or `ProjectName Shared/` (Xcode default when adding targets).
 
 ```
 ProjectName/
-├── ProjectName/           # iOS-specific code
-├── ProjectName macOS/     # macOS-specific code (if needed)
-├── ProjectName tvOS/      # tvOS-specific code (if needed)
-└── Shared/                # Cross-platform code
-    ├── Models/
-    ├── Services/
-    ├── Extensions/
-    └── Utilities/
+├── ProjectName/              # iOS-specific code
+├── ProjectName Shared/       # Cross-platform code (Xcode default naming)
+├── ProjectName macOS/        # macOS-specific (if needed)
+└── ProjectName tvOS/         # tvOS-specific (if needed)
+```
+
+Or with simple `Shared/` folder:
+```
+ProjectName/
+├── ProjectName/
+├── Shared/
+└── ...
 ```
 
 **Setup:**

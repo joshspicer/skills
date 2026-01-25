@@ -138,11 +138,11 @@ See [references/version-embedding.md](references/version-embedding.md) for auto-
 - **Target**: 200-300 lines
 - **Maximum**: 400 lines
 - Split large classes with extension files
-- Put cross-platform code in `Shared/` folder
+- Put cross-platform code in `Shared/` or `ProjectName Shared/` folder
 
 See [references/code-organization.md](references/code-organization.md) for detailed patterns.
 
-## Server Components
+## Server Components (Optional)
 
 For apps with server components, use Docker with health checks:
 
