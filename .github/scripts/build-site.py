@@ -25,6 +25,26 @@ def find_skill_files() -> List[Path]:
             skill_files.append(path)
     return skill_files
 
+def find_reference_files(skill_folder: Path) -> List[Path]:
+    """Find all reference markdown files in a skill's references directory"""
+    references_dir = REPO_ROOT / skill_folder / "references"
+    if not references_dir.exists():
+        return []
+    return list(references_dir.glob("*.md"))
+
+def convert_md_links_to_html(content: str) -> str:
+    """Convert .md links to .html links in markdown/HTML content"""
+    # Match markdown links and href attributes containing .md files
+    # Handles cases like: path.md, path.md#section, path.md?param=value
+    def replace_md_extension(match):
+        return match.group(0).replace('.md', '.html')
+    
+    # Replace .md with .html in href attributes (handles fragments and query params)
+    content = re.sub(r'href="[^"]*\.md([#?][^"]*)?"', replace_md_extension, content)
+    # Replace .md with .html in markdown link syntax (handles fragments and query params)
+    content = re.sub(r'\]\([^)]*\.md([#?][^)]*)?\)', replace_md_extension, content)
+    return content
+
 def parse_skill_file(file_path: Path) -> Dict[str, Any]:
     """Parse a SKILL.md file and extract frontmatter and content"""
     content = file_path.read_text()
@@ -125,8 +145,10 @@ def generate_index_html(skills: List[Dict[str, Any]]) -> str:
 
 def generate_skill_html(skill: Dict[str, Any]) -> str:
     """Generate HTML for a single skill page"""
+    # Convert .md links to .html before markdown processing
+    content_with_html_links = convert_md_links_to_html(skill['content'])
     md = markdown.Markdown(extensions=['fenced_code', 'tables', 'nl2br'])
-    content_html = md.convert(skill['content'])
+    content_html = md.convert(content_with_html_links)
 
     author = skill['metadata'].get('author', '')
     version = skill['metadata'].get('version', '')
@@ -191,6 +213,63 @@ def escape_html(text: str) -> str:
             .replace('>', '&gt;')
             .replace('"', '&quot;')
             .replace("'", '&#39;'))
+
+def generate_reference_html(ref_file: Path, skill_id: str, skill_name: str) -> str:
+    """Generate HTML for a reference page"""
+    try:
+        content = ref_file.read_text(encoding='utf-8')
+    except (IOError, UnicodeDecodeError) as e:
+        print(f"  Warning: Could not read {ref_file}: {e}")
+        return None
+    
+    # Convert .md links to .html before markdown processing
+    content_with_html_links = convert_md_links_to_html(content)
+    
+    md = markdown.Markdown(extensions=['fenced_code', 'tables', 'nl2br'])
+    content_html = md.convert(content_with_html_links)
+    
+    # Extract title from first heading or filename
+    title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
+    title = title_match.group(1) if title_match else ref_file.stem.replace('-', ' ').title()
+    
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{escape_html(title)} - {escape_html(skill_name)} - Skills Repository</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Skills Repository</h1>
+            <p class="subtitle">Development patterns and configurations organized for easy reference</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <a href="../{skill_id}.html" class="btn-back">&larr; Back to {escape_html(skill_name)}</a>
+
+            <div id="skill-content">
+                {content_html}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                <a href="https://github.com/joshspicer/skills" target="_blank" rel="noopener">View on GitHub</a>
+                |
+                <a href="../llm.txt">llm.txt</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
+'''
 
 def update_llm_txt(skills: List[Dict[str, Any]]) -> str:
     """Generate llm.txt content"""
@@ -279,6 +358,21 @@ def main():
         output_file = OUTPUT_DIR / f"{skill['id']}.html"
         output_file.write_text(skill_html)
         print(f"Generated {skill['id']}.html")
+        
+        # Generate reference pages for this skill
+        ref_files = find_reference_files(Path(skill['folder']))
+        if ref_files:
+            # Create references subdirectory for this skill
+            refs_output_dir = OUTPUT_DIR / "references"
+            refs_output_dir.mkdir(exist_ok=True)
+            
+            for ref_file in ref_files:
+                ref_html = generate_reference_html(ref_file, skill['id'], skill['name'])
+                if ref_html is None:
+                    continue
+                ref_output_file = refs_output_dir / f"{ref_file.stem}.html"
+                ref_output_file.write_text(ref_html)
+                print(f"  Generated references/{ref_file.stem}.html")
 
     # Update llm.txt
     llm_txt = update_llm_txt(skills)
