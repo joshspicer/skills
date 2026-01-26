@@ -4,7 +4,7 @@ A collection of development skills and patterns organized for both humans and LL
 
 ## 🌐 Website
 
-Visit the GitHub Pages website: **https://joshspicer.github.io/skills/**
+Visit the GitHub Pages website: **https://joshspicer.com/skills/**
 
 The website automatically updates whenever the main branch is updated.
 
