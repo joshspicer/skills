@@ -1,6 +1,6 @@
 ---
 name: ios-project-setup
-description: Standard patterns for setting up iOS projects including MCP server configuration, Info.plist handling, version/commit embedding, server components with Docker workflows, code organization, simulator instructions, and checking Xcode Cloud CI status. Use when creating new iOS projects or configuring existing ones.
+description: Standard patterns for setting up iOS/macOS/tvOS projects including MCP server configuration, Info.plist handling, version/commit embedding, server components with Docker workflows, code organization, simulator instructions, and checking Xcode Cloud CI status. Use when creating new iOS/tvOS/macOS projects or configuring existing ones.
 metadata:
   author: joshspicer
   version: "1.0"
@@ -9,7 +9,7 @@ compatibility: Requires Xcode, npx for MCP servers, and optionally Docker for se
 
 # iOS Project Setup
 
-Standard patterns and configurations for iOS projects.
+Standard patterns and configurations for iOS/tvOS/macOS projects.  We always ensure that we build apps with future cross-platform compatibility in mind, even if we have one platform in mind specifically to start.
 
 ## Project Structure
 
@@ -23,10 +23,11 @@ ProjectName/
 │   └── scripts/                    # Automation scripts
 ├── ci_scripts/                     # Xcode Cloud scripts
 │   └── ci_post_clone.sh
-├── ProjectName/                    # iOS-specific code
+├── ProjectName iOS/                # Example: iOS-specific code (name with the platform as suffix)
 │   ├── Info.plist
 │   └── GitCommit.swift             # Auto-generated commit hash
-├── Shared/ (or "ProjectName Shared/")  # Cross-platform code
+|   ...
+├── ProjectName Shared/             # Cross-platform code
 ├── ProjectName.xcodeproj/
 │   └── project.pbxproj             # Version and encryption flags
 ├── server/                         # Optional: server component
@@ -40,7 +41,7 @@ ProjectName/
 1. **MCP Servers** - Configure XcodeBuildMCP and apple-developer-docs in `.vscode/mcp.json`
 2. **Encryption Flag** - Set `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO` in project.pbxproj
 3. **Code Organization** - Split files at 400 lines max, use `Class+Feature.swift` extensions
-4. **Shared Folder** - Put cross-platform code in `Shared/` or `ProjectName Shared/`
+4. **Shared Folder** - Put cross-platform code `ProjectName Shared/`
 5. **Version Embedding** - Create `GitCommit.swift` and `ci_scripts/ci_post_clone.sh`
 6. **Server (optional)** - Docker setup with health checks and GitHub Actions workflows
 
