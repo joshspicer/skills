@@ -40,10 +40,12 @@ ProjectName/
 
 1. **MCP Servers** - Configure XcodeBuildMCP and apple-developer-docs in `.vscode/mcp.json`
 2. **Encryption Flag** - Set `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO` in project.pbxproj
-3. **Code Organization** - Split files at 400 lines max, use `Class+Feature.swift` extensions
-4. **Shared Folder** - Put cross-platform code `ProjectName Shared/`
-5. **Version Embedding** - Create `GitCommit.swift` and `ci_scripts/ci_post_clone.sh`
-6. **Server (optional)** - Docker setup with health checks and GitHub Actions workflows
+3. **App Sandbox** - Create `sandbox.xcconfig` and `nosandbox.xcconfig` for swapping configurations
+4. **Code Organization** - Split files at 400 lines max, use `Class+Feature.swift` extensions
+5. **Shared Folder** - Put cross-platform code `ProjectName Shared/`
+6. **Version Embedding** - Create `GitCommit.swift` and `ci_scripts/ci_post_clone.sh`
+7. **Local Packages (optional)** - Add local Swift package dependencies with `.package(path: "../package-name")`
+8. **Server (optional)** - Docker setup with health checks and GitHub Actions workflows
 
 ## MCP Server Configuration
 
@@ -83,6 +85,14 @@ CURRENT_PROJECT_VERSION = 1
 **Always set `ITSAppUsesNonExemptEncryption = NO`** unless using non-exempt encryption. This avoids the annual export compliance questionnaire.
 
 See [references/info-plist.md](references/info-plist.md) for permission strings and background modes.
+
+## App Sandbox Configuration
+
+Always maintain that apps are compatible with sandbox, but provide escape hatches to innovate outside of the sandbox. We use `xcconfig` and project configurations to swap between the two.
+
+**Only add this when you determine you need it** - most apps work fine with the default sandbox.
+
+See [references/app-sandbox.md](references/app-sandbox.md) for xcconfig setup and usage.
 
 ## Version and Commit Embedding
 
@@ -183,6 +193,7 @@ See [references/simulator.md](references/simulator.md) for fallback commands whe
 
 - [MCP Servers](references/mcp-servers.md) - Detailed MCP and permissions setup
 - [Info.plist](references/info-plist.md) - Build settings and permissions
+- [App Sandbox](references/app-sandbox.md) - xcconfig setup for sandbox/nosandbox builds
 - [Version Embedding](references/version-embedding.md) - Commit hashing and auto-bumping
 - [Server & Docker](references/server-docker.md) - Docker workflows and App Store sync
 - [Code Organization](references/code-organization.md) - File splitting patterns
