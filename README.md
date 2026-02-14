@@ -1,6 +1,6 @@
-# Skills Repository
+# Developer Skills Hub
 
-A collection of development skills and patterns organized for both humans and LLMs.
+A curated collection of development patterns, configurations, and best practices for modern software engineering.
 
 ## 🌐 Website
 
