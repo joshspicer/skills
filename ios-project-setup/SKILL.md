@@ -56,7 +56,7 @@ Create `.vscode/mcp.json`:
   "servers": {
     "XcodeBuildMCP": {
       "command": "npx",
-      "args": ["-y", "xcodebuildmcp@latest"],
+      "args": ["-y", "xcodebuildmcp@latest", "mcp"],
       "tools": ["*"],
       "env": { "SENTRY_DISABLED": "true" }
     },
@@ -68,6 +68,8 @@ Create `.vscode/mcp.json`:
   }
 }
 ```
+
+**Note:** xcodebuildmcp v2+ requires the `mcp` subcommand as the last arg.
 
 See [references/mcp-servers.md](references/mcp-servers.md) for Claude Code permissions setup.
 
