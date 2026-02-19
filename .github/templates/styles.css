@@ -5,119 +5,136 @@
 }
 
 :root {
-    --primary-color: #4a9e4f;
-    --text-color: #454545;
-    --text-light: #828282;
-    --bg-color: #ffffff;
+    --primary-color: #0f172a;
+    --accent-color: #0ea5e9;
+    --text-color: #0f172a;
+    --text-light: #6b7280;
+    --bg-color: #f7f9fc;
+    --card-color: #ffffff;
     --border-color: #e5e7eb;
-    --code-bg: #f5f5f5;
+    --code-bg: #f1f5f9;
 }
 
 body {
-    font-family: "Inconsolata", Helvetica, Arial, sans-serif;
+    font-family: "Inter", "Segoe UI", -apple-system, system-ui, sans-serif;
     font-size: 16px;
-    line-height: 1.5;
-    font-weight: 300;
+    line-height: 1.6;
+    font-weight: 400;
     color: var(--text-color);
-    background-color: var(--bg-color);
+    background:
+        radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 25%),
+        radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.06), transparent 22%),
+        var(--bg-color);
+    min-height: 100vh;
 }
 
 .container {
-    max-width: 700px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
 header {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    padding: 30px 20px;
+    background: linear-gradient(135deg, #0b1224, #111827);
+    color: #e2e8f0;
+    padding: 72px 20px 64px;
     text-align: center;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: none;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 12px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #f8fafc;
 }
 
 .subtitle {
-    font-size: 0.875rem;
-    color: var(--text-light);
-    text-transform: uppercase;
+    font-size: 1rem;
+    color: #cbd5e1;
+    text-transform: none;
+    letter-spacing: -0.01em;
 }
 
 main {
-    padding: 40px 20px;
-    min-height: calc(100vh - 300px);
+    padding: 48px 20px;
 }
 
 section {
-    background: var(--bg-color);
-    padding: 30px 0;
+    background: var(--card-color);
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
     color: var(--text-color);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
-    font-weight: bold;
+    padding-bottom: 0;
+    border: none;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .skills-grid {
-    display: block;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
 }
 
 .skill-card {
-    background: var(--bg-color);
-    border-top: 1px solid var(--border-color);
-    padding: 1em 1.5em;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid var(--border-color);
+    padding: 18px 20px;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
     text-decoration: none;
     color: inherit;
     display: block;
-}
-
-.skill-card:first-child {
-    border-top: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
 
 .skill-card:hover {
-    opacity: 0.8;
+    transform: translateY(-3px);
+    opacity: 1;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
 }
 
 .skill-card h3 {
-    font-size: 1em;
-    margin-bottom: 10px;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
     color: var(--text-color);
     font-weight: 700;
 }
 
 .skill-card p {
     color: var(--text-light);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .skill-meta {
-    margin-top: 15px;
-    padding-top: 15px;
+    margin-top: 14px;
+    padding-top: 12px;
     border-top: 1px solid var(--border-color);
     display: flex;
-    gap: 15px;
+    gap: 10px;
     flex-wrap: wrap;
+    color: var(--text-light);
 }
 
 .skill-meta span {
-    font-size: 0.75rem;
-    color: var(--text-light);
-    background: transparent;
-    padding: 4px 0;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    background: rgba(14, 165, 233, 0.08);
+    padding: 6px 10px;
+    border-radius: 12px;
 }
 
 .hidden {
@@ -125,56 +142,62 @@ h2 {
 }
 
 .btn-back {
-    background: transparent;
-    color: var(--primary-color);
-    border: none;
-    padding: 10px 0;
+    background: rgba(14, 165, 233, 0.08);
+    color: var(--accent-color);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    padding: 10px 14px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 20px;
-    transition: opacity 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     text-decoration: none;
-    display: inline-block;
-    font-weight: 700;
+    display: inline-flex;
+    font-weight: 600;
+    border-radius: 999px;
+    align-items: center;
+    gap: 8px;
 }
 
 .btn-back:hover {
-    opacity: 0.8;
+    background: rgba(14, 165, 233, 0.14);
+    opacity: 1;
+    transform: translateY(-1px);
 }
 
 #skill-content {
-    margin-top: 20px;
+    margin-top: 12px;
 }
 
 #skill-content h1 {
-    font-size: 1.9rem;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    margin-bottom: 16px;
     color: var(--text-color);
-    font-weight: bold;
+    font-weight: 800;
+    letter-spacing: -0.02em;
 }
 
 #skill-content h2 {
-    font-size: 1.5rem;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-weight: bold;
+    font-size: 1.3rem;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    font-weight: 700;
 }
 
 #skill-content h3 {
-    font-size: 1.3rem;
-    margin-top: 20px;
+    font-size: 1.15rem;
+    margin-top: 18px;
     margin-bottom: 10px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 #skill-content p {
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     line-height: 1.7;
 }
 
 #skill-content ul,
 #skill-content ol {
-    margin: 15px 0 15px 30px;
+    margin: 14px 0 14px 26px;
 }
 
 #skill-content li {
@@ -184,7 +207,7 @@ h2 {
 #skill-content code {
     background: var(--code-bg);
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: 4px;
     font-family: Monaco, Monospace, "Andale Mono", serif;
     font-size: 13px;
 }
@@ -192,7 +215,7 @@ h2 {
 #skill-content pre {
     background: var(--code-bg);
     padding: 15px;
-    border-radius: 3px;
+    border-radius: 10px;
     overflow-x: auto;
     margin: 15px 0;
     border: 1px solid var(--border-color);
@@ -206,7 +229,7 @@ h2 {
 #skill-content table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 18px 0;
 }
 
 #skill-content th,
@@ -218,18 +241,17 @@ h2 {
 
 #skill-content th {
     background: var(--bg-color);
-    font-weight: bold;
+    font-weight: 700;
 }
 
 #skill-content a {
-    color: var(--primary-color);
+    color: var(--accent-color);
     text-decoration: none;
 }
 
 #skill-content a:hover {
     text-decoration: underline;
 }
-
 
 .error {
     background: #fee;
@@ -239,15 +261,23 @@ h2 {
     margin: 20px 0;
 }
 
+a {
+    color: var(--accent-color);
+}
+
+a:hover {
+    color: #0284c7;
+}
+
 footer {
     background: transparent;
     color: var(--text-light);
     text-align: center;
-    padding: 30px 20px;
-    margin-top: 40px;
-    font-family: Inconsolata;
-    font-size: 12px;
-    border-top: 1px solid var(--border-color);
+    padding: 32px 20px 40px;
+    margin-top: 20px;
+    font-family: "Inter", "Segoe UI", -apple-system, system-ui, sans-serif;
+    font-size: 0.85rem;
+    border-top: none;
 }
 
 footer a {
@@ -256,19 +286,19 @@ footer a {
 }
 
 footer a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 2.3rem;
     }
 
     main {
-        padding: 20px 10px;
+        padding: 28px 14px;
     }
 
     section {
-        padding: 20px 0;
+        padding: 22px;
     }
 }

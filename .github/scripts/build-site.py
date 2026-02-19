@@ -109,21 +109,21 @@ def generate_index_html(skills: List[Dict[str, Any]]) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skills Repository</title>
+    <title>josh's skills</title>
     <link rel="stylesheet" href="styles.css">
-    <meta name="description" content="A collection of development skills and patterns organized for both humans and LLMs">
+    <meta name="description" content="Curated, minimal skill guides by Josh Spicer">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Skills Repository</h1>
-            <p class="subtitle">Development patterns and configurations organized for easy reference</p>
+            <h1>josh's skills</h1>
+            <p class="subtitle">Concise guides for building better software.</p>
         </div>
     </header>
 
     <main class="container">
         <section id="skills-list">
-            <h2>Available Skills</h2>
+            <h2>Skill library</h2>
             <div class="skills-grid">
                 {skills_html}
             </div>
@@ -166,15 +166,15 @@ def generate_skill_html(skill: Dict[str, Any]) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{escape_html(skill['name'])} - Skills Repository</title>
+    <title>{escape_html(skill['name'])} - josh's skills</title>
     <link rel="stylesheet" href="styles.css">
     <meta name="description" content="{escape_html(skill['description'])}">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Skills Repository</h1>
-            <p class="subtitle">Development patterns and configurations organized for easy reference</p>
+            <h1>josh's skills</h1>
+            <p class="subtitle">Concise guides for building better software.</p>
         </div>
     </header>
 
@@ -237,14 +237,14 @@ def generate_reference_html(ref_file: Path, skill_id: str, skill_name: str) -> s
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{escape_html(title)} - {escape_html(skill_name)} - Skills Repository</title>
+    <title>{escape_html(title)} - {escape_html(skill_name)} - josh's skills</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Skills Repository</h1>
-            <p class="subtitle">Development patterns and configurations organized for easy reference</p>
+            <h1>josh's skills</h1>
+            <p class="subtitle">Concise guides for building better software.</p>
         </div>
     </header>
 
@@ -292,12 +292,12 @@ def update_llm_txt(skills: List[Dict[str, Any]]) -> str:
 
         skills_section += "\n---\n"
 
-    return f'''# Skills Repository - LLM Knowledge Base
+    return f'''# josh's skills - LLM Knowledge Base
 
-This file provides structured information about available skills in this repository for LLM consumption.
+    This file provides structured information about available skills in this repository for LLM consumption.
 
-## Repository Information
-- Repository: joshspicer/skills
+    ## Repository Information
+    - Repository: joshspicer/skills
 - Purpose: Collection of development skills and patterns
 - Format: Each skill is documented in a SKILL.md file with YAML frontmatter
 
