@@ -294,10 +294,10 @@ def update_llm_txt(skills: List[Dict[str, Any]]) -> str:
 
     return f'''# josh's skills - LLM Knowledge Base
 
-    This file provides structured information about available skills in this repository for LLM consumption.
+This file provides structured information about available skills in this repository for LLM consumption.
 
-    ## Repository Information
-    - Repository: joshspicer/skills
+## Repository Information
+- Repository: joshspicer/skills
 - Purpose: Collection of development skills and patterns
 - Format: Each skill is documented in a SKILL.md file with YAML frontmatter
 
